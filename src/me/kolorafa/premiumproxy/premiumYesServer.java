@@ -20,8 +20,8 @@ public class premiumYesServer implements Runnable {
 
     int port;
     premiumproxyPlugin plugin;
-    public boolean pracuj=true;
-    
+    public boolean pracuj = true;
+
     premiumYesServer(premiumproxyPlugin aThis, int aInt) {
         this.port = aInt;
         plugin = aThis;
@@ -36,6 +36,11 @@ public class premiumYesServer implements Runnable {
                 + "Connection: close\r\n\r\n"
                 + "YES";
         try {
+            if (plugin.getConfig().getString("listenHost").equalsIgnoreCase("off")
+                    || plugin.getConfig().getString("listenHost").equalsIgnoreCase("none")
+                    || plugin.getConfig().getString("listenHost").equalsIgnoreCase("false")) {
+                return;
+            }
             ServerSocket s = new ServerSocket(port, 0, InetAddress.getByName(plugin.getConfig().getString("listenHost")));
             while (pracuj) {
                 Socket c = s.accept();
@@ -43,19 +48,20 @@ public class premiumYesServer implements Runnable {
                     BufferedReader input = new BufferedReader(new InputStreamReader(c.getInputStream()));
                     BufferedWriter output = new BufferedWriter(new OutputStreamWriter(c.getOutputStream()));
                     output.write(yesString);
-                    output.close();
+                    input.readLine();
                     while (input.ready()) {
                         input.readLine();
                     }
+                    output.close();
                     c.close();
                 } catch (IOException ex) {
                     System.out.println(ex);
                 }
             }
         } catch (UnknownHostException ex) {
-                    System.out.println(ex);
+            System.out.println(ex);
         } catch (IOException ex) {
-                    System.out.println(ex);
+            System.out.println(ex);
         }
     }
 }
