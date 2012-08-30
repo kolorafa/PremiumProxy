@@ -36,7 +36,7 @@ public class MinecraftProxySelector extends ProxySelector {
             plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new PremiumCheck(plugin, uri));
 
             ArrayList<Proxy> l = new ArrayList<Proxy>();
-            SocketAddress addr = new InetSocketAddress("localhost", port);
+            SocketAddress addr = new InetSocketAddress(plugin.getConfig().getString("connectHost"), port);
             Proxy proxy = new Proxy(Proxy.Type.HTTP, addr);
             l.add(proxy);
             return l;

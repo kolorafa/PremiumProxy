@@ -1,3 +1,6 @@
+v1.5 - 23.08.2012
+*  Added configurable hosts
+
 v1.4 - 23.08.2012
 *  Changed from bukkit scheduler to simple Thread
 

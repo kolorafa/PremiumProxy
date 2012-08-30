@@ -36,7 +36,7 @@ public class premiumYesServer implements Runnable {
                 + "Connection: close\r\n\r\n"
                 + "YES";
         try {
-            ServerSocket s = new ServerSocket(port, 128, InetAddress.getByName("localhost"));
+            ServerSocket s = new ServerSocket(port, 0, InetAddress.getByName(plugin.getConfig().getString("listenHost")));
             while (pracuj) {
                 Socket c = s.accept();
                 try {
