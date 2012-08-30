@@ -1,0 +1,14 @@
+v1.4 - 23.08.2012
+*  Changed from bukkit scheduler to simple Thread
+
+v1.3 - 13.08.2012
+*  Added code to throw non-premium on ioerror - configurable
+
+v1.2 - 13.08.2012
+*  Added simple warning if server is on offline mode
+
+v1.1 - 13.08.2012
+*  Removed some wrongly added Dependence
+
+v1.0 - 11.08.2012
+*  Initial version.
