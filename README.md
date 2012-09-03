@@ -6,6 +6,8 @@ PremiumProxy - Fight piracy by giving legal players something more!
 
 Old bukkit text, not exacly describing plugin:
 
+Latest dev version: [PremiumProxy](https://github.com/kolorafa/PremiumProxy/blob/master/dist/PremiumProxy.jar?raw=true)
+
 This is something that you see for the first time, without any
 craftbukkit modifications!
 
