@@ -87,16 +87,12 @@ The only thing you need to do is do catch PremiumStatusEvent and do
 with the player what you would like to do, example plugin code that
 changes player group (using Vault) from "guest" to "player" if online:
 
-@EventHandler(priority = EventPriority.NORMAL)
-public void playergroupchange(PremiumStatusEvent event) {
- if(event.hasPremium()){
-  String group =
-perms.getPrimaryGroup(getServer().getPlayerExact(event.getPlayerName()));
-  if(group.equalsIgnoreCase("guest")){
-   perms.playerAddGroup((String)null, event.getPlayerName(), "player");
-  }
- }
-}
+    @EventHandler(priority = EventPriority.NORMAL)
+     public void playergroupchange(me.kolorafa.premiumproxy.PremiumStatusEvent event) {
+     if(event.hasPremium()){
+      //Your code what to do if player is legal
+     }
+    }
 
 PremiumProxy - Main plugin that check for Premium players
 
