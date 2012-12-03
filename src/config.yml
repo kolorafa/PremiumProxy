@@ -3,3 +3,4 @@ port: 25570
 listenHost: localhost
 connectHost: localhost
 nonPremiumOnIOError: false
+defaultRedirect: true
