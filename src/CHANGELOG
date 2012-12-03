@@ -1,3 +1,7 @@
+v2.0
+*  Added proxy event
+*  Added PremiumProxyAsk
+
 v1.6
 *  Added "off" state at listenHost to disable listener.
 
