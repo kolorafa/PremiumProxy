@@ -64,7 +64,7 @@ public class MinecraftProxySelector extends ProxySelector {
                 Map<String, List<String>> parms = getUrlParameters(uri.toString());
                 ArrayList<Proxy> l = new ArrayList<Proxy>();
 
-                plugin.log("select for "+parms.get("user"));
+                plugin.log("select for "+parms.get("user").get(0) +" "+parms.get("serverId").get(0));
                 
                 String login = uri.toString();
                 int start = login.indexOf("?user=") + 6;

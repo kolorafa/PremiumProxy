@@ -58,6 +58,7 @@ public class premiumYesServer implements Runnable {
                     System.out.println(ex);
                 }
             }
+            s.close();
         } catch (UnknownHostException ex) {
             System.out.println(ex);
         } catch (IOException ex) {

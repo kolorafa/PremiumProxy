@@ -49,7 +49,6 @@ public class premiumproxyPlugin extends JavaPlugin {
         MinecraftProxySelector ps = new MinecraftProxySelector(this, ProxySelector.getDefault(), getConfig().getInt("port"));
         ProxySelector.setDefault(ps);
         yesserver = new premiumYesServer(this, getConfig().getInt("port"));
-        
         yesthread = new Thread(yesserver);
         yesthread.start();
         //getServer().getScheduler().scheduleAsyncDelayedTask(this, yesserver);
