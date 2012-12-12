@@ -16,17 +16,32 @@ import java.util.logging.Logger;
  *
  * @author kolorafa
  */
-public class premiumYesServer implements Runnable {
+public class premiumYesServer extends Thread {
 
     int port;
     premiumproxyPlugin plugin;
     public boolean pracuj = true;
-
+    public ServerSocket s;
+    
     premiumYesServer(premiumproxyPlugin aThis, int aInt) {
         this.port = aInt;
         plugin = aThis;
     }
 
+    public void zamknij(){
+        pracuj=false;
+        try {
+            join(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(premiumYesServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            s.close();
+        } catch (IOException ex) {
+            Logger.getLogger(premiumYesServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @Override
     public void run() {
         String yesString =
@@ -41,7 +56,7 @@ public class premiumYesServer implements Runnable {
                     || plugin.getConfig().getString("listenHost").equalsIgnoreCase("false")) {
                 return;
             }
-            ServerSocket s = new ServerSocket(port, 0, InetAddress.getByName(plugin.getConfig().getString("listenHost")));
+            s = new ServerSocket(port, 0, InetAddress.getByName(plugin.getConfig().getString("listenHost")));
             while (pracuj) {
                 Socket c = s.accept();
                 try {

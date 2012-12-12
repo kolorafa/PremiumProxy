@@ -31,30 +31,37 @@ public class premiumproxyPlugin extends JavaPlugin {
             logger.log(Level.INFO, "[" + pdffile.getName() + "] DEBUG: " + text);
         }
     }
-
     premiumYesServer yesserver;
-    Thread yesthread;
-    
+    MinecraftProxySelector ps;
+
     @Override
     public void onDisable() {
+        if (ProxySelector.getDefault() == ps) {
+            ProxySelector.setDefault(ps.defsel);
+        } else {
+            getLogger().info("Unable to disable PS");
+        }
+
+        yesserver.zamknij();
+        if (yesserver.isAlive()) {
+            logger.log(Level.INFO, "[" + pdffile.getName() + "] server did not die in time.");
+            yesserver.interrupt();
+        }
         logger.log(Level.INFO, "[" + pdffile.getName() + "] is disabled.");
-        yesserver.pracuj=false;
-        if(yesthread.isAlive())yesthread.interrupt();
     }
 
     @Override
     public void onEnable() {
         loadConfiguration();
         pdffile = this.getDescription();
-        MinecraftProxySelector ps = new MinecraftProxySelector(this, ProxySelector.getDefault(), getConfig().getInt("port"));
+        ps = new MinecraftProxySelector(this, ProxySelector.getDefault(), getConfig().getInt("port"));
         ProxySelector.setDefault(ps);
         yesserver = new premiumYesServer(this, getConfig().getInt("port"));
-        yesthread = new Thread(yesserver);
-        yesthread.start();
+        yesserver.start();
         //getServer().getScheduler().scheduleAsyncDelayedTask(this, yesserver);
         if (getServer().getOnlineMode() == false) {
             log("Server offline, plugin probably will not work at all !");
-        };
+        }
     }
 
     private void loadConfiguration() {
