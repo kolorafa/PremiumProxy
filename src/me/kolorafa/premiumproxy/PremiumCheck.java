@@ -8,8 +8,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,8 +38,9 @@ public class PremiumCheck implements Runnable {
         int stop = login.indexOf("&serverId=");
         login = login.substring(start, stop);
         try {
-            URL url = new URL(uri.toString().replaceFirst("http", "https"));
-            bufferedreader = new BufferedReader(new InputStreamReader(url.openStream()));
+            URL url = new URL(uri.toString());
+            URLConnection uc = url.openConnection(Proxy.NO_PROXY);
+            bufferedreader = new BufferedReader(new InputStreamReader(uc.getInputStream()));
             String s1 = bufferedreader.readLine();
 
 
