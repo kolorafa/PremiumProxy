@@ -1,3 +1,6 @@
+v2.1
+*  Fixed unable to find valid certification path
+
 v2.0
 *  Added proxy event
 *  Added PremiumProxyAsk
