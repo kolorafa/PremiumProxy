@@ -59,37 +59,52 @@ public class MinecraftProxySelector extends ProxySelector {
         if (uri == null) {
             throw new IllegalArgumentException("URI can't be null.");
         }
-        if (uri.getScheme().equalsIgnoreCase("http") && uri.getHost().equalsIgnoreCase("session.minecraft.net")) {
+        plugin.log("PremiumProxy URI check: " + uri.toASCIIString());
+
+        if (uri.getScheme().equalsIgnoreCase("socket") && uri.getHost().equalsIgnoreCase("session.minecraft.net")) {
             try {
                 Map<String, List<String>> parms = getUrlParameters(uri.toString());
                 ArrayList<Proxy> l = new ArrayList<Proxy>();
-
-                plugin.log("select for "+parms.get("user").get(0) +" "+parms.get("serverId").get(0));
-                
-                String login = uri.toString();
-                int start = login.indexOf("?user=") + 6;
-                int stop = login.indexOf("&serverId=");
-                login = login.substring(start, stop);
-
-                PremiumProxyAsk ev = new PremiumProxyAsk(login, l, plugin.getConfig().getBoolean("defaultRedirect", true));
-                plugin.getServer().getPluginManager().callEvent(ev);
-                if (ev.getDefaultRedirectToYes()) {
-                    SocketAddress addr = new InetSocketAddress(plugin.getConfig().getString("connectHost"), port);
-                    Proxy proxy = new Proxy(Proxy.Type.HTTP, addr);
-                    l.add(proxy);
-                    plugin.log("redirecting to YES for "+login);
-                }
-                if(!ev.disablePremiumStatusEvent){
-                    plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new PremiumCheck(plugin, uri));
-                    plugin.log("external check for "+login);
-                }
-                if (!l.isEmpty()) {
-                    return l;
-                }
+                SocketAddress addr = new InetSocketAddress(plugin.getConfig().getString("connectHost"), port);
+                Proxy proxy = new Proxy(Proxy.Type.SOCKS, addr);
+                l.add(proxy);
+                plugin.log("redirecting .....");
+                return l;
             } catch (UnsupportedEncodingException ex) {
                 plugin.log("url error, what the f***");
             }
         }
+//        if (uri.getScheme().equalsIgnoreCase("http") && uri.getHost().equalsIgnoreCase("session.minecraft.net")) {
+//            try {
+//                Map<String, List<String>> parms = getUrlParameters(uri.toString());
+//                ArrayList<Proxy> l = new ArrayList<Proxy>();
+//
+//                plugin.log("select for " + parms.get("user").get(0) + " " + parms.get("serverId").get(0));
+//
+//                String login = uri.toString();
+//                int start = login.indexOf("?user=") + 6;
+//                int stop = login.indexOf("&serverId=");
+//                login = login.substring(start, stop);
+//
+//                PremiumProxyAsk ev = new PremiumProxyAsk(login, l, plugin.getConfig().getBoolean("defaultRedirect", true));
+//                plugin.getServer().getPluginManager().callEvent(ev);
+//                if (ev.getDefaultRedirectToYes()) {
+//                    SocketAddress addr = new InetSocketAddress(plugin.getConfig().getString("connectHost"), port);
+//                    Proxy proxy = new Proxy(Proxy.Type.HTTP, addr);
+//                    l.add(proxy);
+//                    plugin.log("redirecting to YES for " + login);
+//                }
+//                if (!ev.disablePremiumStatusEvent) {
+//                    plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new PremiumCheck(plugin, uri));
+//                    plugin.log("external check for " + login);
+//                }
+//                if (!l.isEmpty()) {
+//                    return l;
+//                }
+//            } catch (UnsupportedEncodingException ex) {
+//                plugin.log("url error, what the f***");
+//            }
+//        }
         if (defsel != null) {
             return defsel.select(uri);
         } else {

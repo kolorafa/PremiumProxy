@@ -27,6 +27,7 @@ public class PremiumProxyAsk extends Event {
     }
     
     private String playerName;
+    private String sessId;
     ArrayList<Proxy> proxyList;
     boolean allowToJoin;
     boolean disablePremiumStatusEvent;
@@ -34,6 +35,14 @@ public class PremiumProxyAsk extends Event {
     public PremiumProxyAsk(String login, ArrayList<Proxy> proxyList, boolean defaultAllow) {
         playerName = login;
         this.proxyList = proxyList;
+        this.allowToJoin = defaultAllow;
+        disablePremiumStatusEvent=false;
+    }
+
+    public PremiumProxyAsk(String login, String sessId, boolean defaultAllow) {
+        this.playerName = login;
+        this.sessId = sessId;
+        this.proxyList = null;
         this.allowToJoin = defaultAllow;
         disablePremiumStatusEvent=false;
     }

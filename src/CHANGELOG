@@ -1,3 +1,6 @@
+v3.0
+*  Code rewrite because mojang changed player verify method, but fully compatible with old PremiumProxy
+
 v2.1
 *  Fixed unable to find valid certification path
 

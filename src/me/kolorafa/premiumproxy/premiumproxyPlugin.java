@@ -31,7 +31,7 @@ public class premiumproxyPlugin extends JavaPlugin {
             logger.log(Level.INFO, "[" + pdffile.getName() + "] DEBUG: " + text);
         }
     }
-    premiumYesServer yesserver;
+    KolorafaSocketYesServer yesserver;
     MinecraftProxySelector ps;
 
     @Override
@@ -56,7 +56,8 @@ public class premiumproxyPlugin extends JavaPlugin {
         pdffile = this.getDescription();
         ps = new MinecraftProxySelector(this, ProxySelector.getDefault(), getConfig().getInt("port"));
         ProxySelector.setDefault(ps);
-        yesserver = new premiumYesServer(this, getConfig().getInt("port"));
+        //yesserver = new premiumYesServer(this, getConfig().getInt("port"));
+        yesserver = new KolorafaSocketYesServer(this, getConfig().getInt("port"));
         yesserver.start();
         //getServer().getScheduler().scheduleAsyncDelayedTask(this, yesserver);
         if (getServer().getOnlineMode() == false) {

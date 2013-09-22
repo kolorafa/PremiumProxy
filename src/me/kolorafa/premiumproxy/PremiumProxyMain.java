@@ -23,19 +23,23 @@ public class PremiumProxyMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-            ServerSocket s = new ServerSocket(1234, 10, Inet4Address.getLocalHost());
-            
-            while(true){
-                Socket c = s.accept();
-                BufferedReader input = new BufferedReader(new InputStreamReader(c.getInputStream()));
-                BufferedWriter output = new BufferedWriter(new OutputStreamWriter(c.getOutputStream()));
-                
-            }
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(PremiumProxyMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(PremiumProxyMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            KolorafaSocketYesServer server = new KolorafaSocketYesServer("0.0.0.0", 8123);
+            server.start();
+//        try {
+//            
+//            
+//            ServerSocket s = new ServerSocket(1234, 10, Inet4Address.getLocalHost());
+//            
+//            while(true){
+//                Socket c = s.accept();
+//                BufferedReader input = new BufferedReader(new InputStreamReader(c.getInputStream()));
+//                BufferedWriter output = new BufferedWriter(new OutputStreamWriter(c.getOutputStream()));
+//                
+//            }
+//        } catch (UnknownHostException ex) {
+//            Logger.getLogger(PremiumProxyMain.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(PremiumProxyMain.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 }
