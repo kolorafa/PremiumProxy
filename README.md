@@ -71,8 +71,8 @@ Example plugin code that changes player group (using Vault) from "guest" to "pla
 
 ## Known addons:
 
-    PremiumGroupChanger - Example plugin that changes player group from "nonpremium" to "premium" if Joined player is Premium (online) user.
-    Premium Money - Plugin gives money to premium players on first join, prevents players from joining multiple times with fake names to gain money ;)
-    Make your own and PM me :)
+- PremiumGroupChanger - Example plugin that changes player group from "nonpremium" to "premium" if Joined player is Premium (online) user.
+- Premium Money - Plugin gives money to premium players on first join, prevents players from joining multiple times with fake names to gain money ;)
+- Make your own and PM me :)
 
 ## Something doesn't work? Create ticket!
