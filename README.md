@@ -1,5 +1,7 @@
 # PremiumProxy - Fight piracy by giving legal players something more!
 
+# No longer Works, mojang changed their servers config
+
 Old bukkit text, not exacly describing plugin:
 
     This is something that you see for the first time, without anycraftbukkit modifications!
